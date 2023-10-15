@@ -7,7 +7,7 @@ from datetime import datetime
 import uuid
 
 
-class BaseModel:
+class BaseModel():
 
     """Class for base model of objects."""
 
@@ -15,24 +15,13 @@ class BaseModel:
         """Initialization of  Base instance.
 
         Args:
-            - *args: list of argument
-            - **kwargs: dict of key-values argument
+            - id (str) : uuid  at instance creation
+            - create_at(datetime) : datetime at instance creation
+            - update_at (datetime): datetime at instance update
         """
-
-        if kwargs is not None and kwargs != {}:
-            for k in kwargs:
-                if k == "created_at":
-                    self.__dict__["created_at"] = datetime.strptime(
-                        kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
-                elif k == "updated_at":
-                    self.__dict__["updated_at"] = datetime.strptime(
-                        kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
-                else:
-                    self.__dict__[k] = kwargs[k]
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
     def __str__(self):
         """Returns returns printable string representation of an instance."""
@@ -46,8 +35,8 @@ class BaseModel:
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance."""
-        my_dict = self.__dict__.copy()
-        my_dict["__class__"] = type(self).__name__
-        my_dict["created_at"] = my_dict["created_at"].isoformat("T")
-        my_dict["updated_at"] = my_dict["updated_at"].isoformat("T")
-        return my_dict
+        inst_dict = self.__dict__.copy()
+        inst_dict["__class__"] = type(self).__name__
+        inst_dict["created_at"] = inst_dict["created_at"].isoformat("T")
+        inst_dict["updated_at"] = inst_dict["updated_at"].isoformat("T")
+        return inst_dict
