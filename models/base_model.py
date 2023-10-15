@@ -11,7 +11,7 @@ class BaseModel():
 
     """Class for base model of objects."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, id, created_at, updated_at):
         """Initialization of  Base instance.
 
         Args:
