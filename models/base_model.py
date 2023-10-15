@@ -7,38 +7,35 @@ from datetime import datetime
 import uuid
 
 
-class BaseModel():
+class BaseModel:
 
-    """Class for base model of objects."""
-
-    def __init__(self, *args, **kwargs):
-        """Initialization of  Base instance.
-
+    """Class for base model of objects.
         Args:
             - id (str) : uuid  at instance creation
             - create_at(datetime) : datetime at instance creation
             - update_at (datetime): datetime at instance update
-            - *args: list of argument
-            - **kwargs: dict of key-values argument
-        """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    """
+    id = str(uuid.uuid4())
+    created_at = datetime.now()
+    updated_at = datetime.now()
 
-    def __str__(self):
+    @classmethod
+    def __str__(cls):
         """Returns returns printable string representation of an instance."""
         return "[{}] ({}) {}".\
-            format(type(self).__name__, self.id, self.__dict__)
+            format(type(cls).__name__, cls.id, cls.__dict__)
 
-    def save(self):
+    @classmethod
+    def save(cls):
         """updates the public instance attribute updated_at with the current
          datetime."""
-        self.updated_at = datetime.now()
+        cls.updated_at = datetime.now()
 
-    def to_dict(self):
+    @classmethod
+    def to_dict(cls):
         """returns a dictionary containing all keys/values of the instance."""
-        inst_dict = self.__dict__.copy()
-        inst_dict["__class__"] = type(self).__name__
+        inst_dict = cls.__dict__.copy()
+        inst_dict["__class__"] = type(cls).__name__
         inst_dict["created_at"] = inst_dict["created_at"].isoformat("T")
         inst_dict["updated_at"] = inst_dict["updated_at"].isoformat("T")
         return inst_dict
