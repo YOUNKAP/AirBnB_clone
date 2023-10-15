@@ -11,13 +11,15 @@ class BaseModel():
 
     """Class for base model of objects."""
 
-    def __init__(self, id, created_at, updated_at):
+    def __init__(self, *args, **kwargs):
         """Initialization of  Base instance.
 
         Args:
             - id (str) : uuid  at instance creation
             - create_at(datetime) : datetime at instance creation
             - update_at (datetime): datetime at instance update
+            - *args: list of argument
+            - **kwargs: dict of key-values argument
         """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
