@@ -20,22 +20,22 @@ class BaseModel:
     updated_at = datetime.now()
 
     @classmethod
-    def __str__(cls):
+    def __str__(baseModel):
         """Returns returns printable string representation of an instance."""
         return "[{}] ({}) {}".\
-            format(type(cls).__name__, cls.id, cls.__dict__)
+            format(type(baseModel).__name__, baseModel.id, baseModel.__dict__)
 
     @classmethod
-    def save(cls):
+    def save(baseModel):
         """updates the public instance attribute updated_at with the current
          datetime."""
-        cls.updated_at = datetime.now()
+        baseModel.updated_at = datetime.now()
 
     @classmethod
-    def to_dict(cls):
+    def to_dict(baseModel):
         """returns a dictionary containing all keys/values of the instance."""
-        inst_dict = cls.__dict__.copy()
-        inst_dict["__class__"] = type(cls).__name__
+        inst_dict = baseModel.__dict__.copy()
+        inst_dict["__class__"] = type(baseModel).__name__
         inst_dict["created_at"] = inst_dict["created_at"].isoformat("T")
         inst_dict["updated_at"] = inst_dict["updated_at"].isoformat("T")
         return inst_dict
