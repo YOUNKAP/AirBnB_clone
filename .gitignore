@@ -2,3 +2,4 @@ check*
 models/base_model_*
 file.json
 console_bon_*
+models/engine/file_storage_bon*
